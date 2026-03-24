@@ -65,8 +65,8 @@ export const projects: ProjectCardProps[] = [
   {
     title: 'FlowForge',
     description:
-      'Interactive algorithm visualiser that animates sorting and pathfinding algorithms step-by-step. Supports 12 algorithms with adjustable speed and custom input arrays.',
-    tags: ['TypeScript', 'Canvas API', 'Vite'],
+      'FlowForge is a comprehensive internal company workflow and request management platform. It streamlines business processes such as hardware/software purchase requests, IT access approvals, and travel authorizations, providing employees with an intuitive dashboard and robust analytics for managers.',
+    tags: ['React', 'Vite', 'Express.js', 'Node.js', 'MySQL'],
     repoUrl: 'https://github.com/dylanc0214/flow-forge',
     demoUrl: 'https://flowforge.dylanchow.info/',
   },
@@ -99,11 +99,26 @@ export const projects: ProjectCardProps[] = [
   //   repoUrl: 'https://github.com/example/budgetbuddy',
   // },
   {
+    title: 'Educational Management System',
+    description:
+      'Educational Management System built on Python.',
+    tags: ['Python'],
+    repoUrl: 'https://github.com/KIT0401/Python-Assignment',
+  },
+  {
     title: 'Underrated Studio Booking System',
     description:
       'A full-stack web application for booking DJ studio sessions, with user authentication, booking management, payment processing, and a full admin dashboard.',
     tags: ['React', 'TypeScript', 'Vite', 'MySQL', 'Node.js', 'Express'],
     repoUrl: 'https://github.com/dylanc0214/studio-booking-system',
     demoUrl: 'https://underrated.dylanchow.info/',
+  },
+  {
+    title: 'DuitFlow',
+    description:
+      'DuitFlow (meaning "Money Flow") is a modern, full-stack personal finance application built to help you track incomes, expenses, budgets, and accounts seamlessly. It offers an intuitive dashboard with a clean UI directly integrated with Supabase for backend authentication and data storage.',
+    tags: ['React', 'Next.js', 'TypeScript', 'PostgreSQL (Supabase)'],
+    repoUrl: 'https://github.com/dylanc0214/duitflow',
+    demoUrl: 'https://duitflow.dylanchow.info/',
   },
 ]
