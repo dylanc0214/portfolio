@@ -72,7 +72,12 @@ export function AboutSection() {
       <div className="about__container">
         {/* Profile avatar */}
         <div ref={avatarRef} className="about__avatar" aria-hidden="true">
-          <div className="about__avatar-initials">Dylan</div>
+          {/* Replaced the "Dylan" text with an actual image */}
+          <img 
+            src="/pfp.jpeg" 
+            alt="Dylan Chow" 
+            className="about__avatar-image" 
+          />
         </div>
 
         {/* Text content */}
@@ -94,14 +99,11 @@ export function AboutSection() {
             </li>
           </ul>
           <p className="about__bio">
-            Passionate software engineering student with a focus on building
-            interactive, user-centric web applications. Seeking internship
-            opportunities to apply my skills in real-world environments and
-            grow alongside experienced engineering teams.
+            I am a motivated Information Technology diploma student at Asia Pacific University in Kuala Lumpur, with hands-on experience in programming. I am also passionate about tech, with experience in Python (3 years), Java, HTML, CSS, PHP, JavaScript, and MySQL. My academic foundation and self-driven learning through certifications like Programming for Everybody (Python) and Excel Crash Course reflect a balance of technical and interpersonal abilities.
           </p>
           <a
             href="/Resume.pdf"
-            download
+            download="Resume.pdf"
             className="about__cv-link"
             aria-label="Download CV as PDF"
           >

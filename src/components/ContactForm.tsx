@@ -47,6 +47,7 @@ export function ContactForm() {
         fromName: state.name,
         fromEmail: state.email,
         message: state.message,
+        time: new Date().toLocaleString(),
       })
       setState((prev) => ({ ...prev, status: 'success' }))
     } catch {

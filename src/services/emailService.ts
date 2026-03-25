@@ -2,6 +2,7 @@ export interface EmailPayload {
   fromName: string
   fromEmail: string
   message: string
+  time: string
 }
 
 /**
@@ -22,6 +23,7 @@ export async function send(payload: EmailPayload): Promise<void> {
       from_name: payload.fromName,
       from_email: payload.fromEmail,
       message: payload.message,
+      time: payload.time,
     },
     publicKey,
   )

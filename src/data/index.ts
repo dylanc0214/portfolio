@@ -21,13 +21,13 @@ export const skills: Skill[] = [
   { id: 'postgre', name: 'PostgreSQL', category: 'Languages', proficiency: 0.6 },
 
   // Frameworks
-  { id: 'react', name: 'React', category: 'Frameworks', proficiency: 0.7 },
-  { id: 'nextjs', name: 'Next.js', category: 'Frameworks', proficiency: 0.7 },
+  { id: 'react', name: 'React', category: 'Frameworks', proficiency: 0.5 },
+  { id: 'nextjs', name: 'Next.js', category: 'Frameworks', proficiency: 0.5 },
 
   // Tools
-  { id: 'git', name: 'Git', category: 'Tools', proficiency: 0.9 },
-  { id: 'vercel', name: 'Vercel', category: 'Tools', proficiency: 0.9 },
-  { id: 'pgadmin', name: 'PgAdmin', category: 'Tools', proficiency: 0.8 },
+  { id: 'git', name: 'Git', category: 'Tools', proficiency: 0.7 },
+  { id: 'vercel', name: 'Vercel', category: 'Tools', proficiency: 0.6 },
+  { id: 'pgadmin', name: 'PgAdmin', category: 'Tools', proficiency: 0.6 },
 ]
 
 export const skillsData: { languages: SkillBadgeProps[]; frameworks: SkillBadgeProps[]; tools: SkillBadgeProps[] } = {
@@ -53,6 +53,7 @@ export const projects: ProjectCardProps[] = [
       'Tuition Centre Management System for Advanced Tuition Centre to manage their staff and student data',
     tags: ['Java'],
     repoUrl: 'https://github.com/lw112k/LMS_Java',
+    imageUrl: '/Learning Management System.png'
   },
   {
     title: 'EcoQuest',
@@ -61,6 +62,7 @@ export const projects: ProjectCardProps[] = [
     tags: ['HTML', 'JavaScript', 'CSS', 'PHP', 'MySQL'],
     repoUrl: 'https://github.com/lw112k/EcoQuest',
     demoUrl: 'https://ecoquest.dylanchow.info/',
+    imageUrl: '/EcoQuest.png'
   },
   {
     title: 'FlowForge',
@@ -69,6 +71,7 @@ export const projects: ProjectCardProps[] = [
     tags: ['React', 'Vite', 'Express.js', 'Node.js', 'MySQL'],
     repoUrl: 'https://github.com/dylanc0214/flow-forge',
     demoUrl: 'https://flowforge.dylanchow.info/',
+    imageUrl: '/FlowForge.png'
   },
   // {
   //   title: 'Fyt',
@@ -104,6 +107,7 @@ export const projects: ProjectCardProps[] = [
       'Educational Management System built on Python.',
     tags: ['Python'],
     repoUrl: 'https://github.com/KIT0401/Python-Assignment',
+    imageUrl: '/Education Management System.png'
   },
   {
     title: 'Underrated Studio Booking System',
@@ -112,6 +116,7 @@ export const projects: ProjectCardProps[] = [
     tags: ['React', 'TypeScript', 'Vite', 'MySQL', 'Node.js', 'Express'],
     repoUrl: 'https://github.com/dylanc0214/studio-booking-system',
     demoUrl: 'https://underrated.dylanchow.info/',
+    imageUrl: '/Underrated Studio Booking System.png'
   },
   {
     title: 'DuitFlow',
@@ -120,5 +125,6 @@ export const projects: ProjectCardProps[] = [
     tags: ['React', 'Next.js', 'TypeScript', 'PostgreSQL (Supabase)'],
     repoUrl: 'https://github.com/dylanc0214/duitflow',
     demoUrl: 'https://duitflow.dylanchow.info/',
+    imageUrl: '/DuitFlow.png'
   },
 ]

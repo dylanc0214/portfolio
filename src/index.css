@@ -13,14 +13,16 @@
 
 /* Root variables */
 :root {
-  --color-bg: #0a0a0f;
-  --color-surface: #12121a;
-  --color-primary: #6c63ff;
-  --color-accent: #00d4ff;
-  --color-text: #e8e8f0;
-  --color-text-muted: #8888aa;
-  --color-error: #ff4d6d;
-  --color-success: #4dffb4;
+  --color-bg: #fdf8f4;
+  --color-surface: #ffffff;
+  --color-primary: #f43a09;
+  --color-accent: #68d388;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-error: #f43a09;
+  --color-success: #68d388;
+  --color-orange-warm: #ffb766;
+  --color-mint: #c2edda;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -142,7 +144,7 @@ button {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  background-color: rgba(10, 10, 10, 0.85);
+  background-color: rgba(253, 248, 244, 0.90);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -318,17 +320,17 @@ button {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-bg);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-orange-warm) 100%);
   border-radius: 50px;
   cursor: pointer;
   will-change: transform, opacity;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(244, 58, 9, 0.35);
 }
 
 .hero__cta:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.55);
+  box-shadow: 0 8px 30px rgba(244, 58, 9, 0.5);
 }
 
 .hero__cta:active {
@@ -356,27 +358,27 @@ button {
 
 /* Cube — flat-face box using border + gradient */
 .hero__shape--cube {
-  border: 2px solid rgba(108, 99, 255, 0.35);
+  border: 2px solid rgba(244, 58, 9, 0.35);
   background: linear-gradient(
     135deg,
-    rgba(108, 99, 255, 0.12) 0%,
-    rgba(0, 212, 255, 0.06) 100%
+    rgba(255, 183, 102, 0.18) 0%,
+    rgba(244, 58, 9, 0.08) 100%
   );
   border-radius: 4px;
-  box-shadow: 0 0 20px rgba(108, 99, 255, 0.15);
+  box-shadow: 0 0 20px rgba(244, 58, 9, 0.15);
 }
 
 /* Sphere — circle using border-radius */
 .hero__shape--sphere {
   border-radius: 50%;
-  border: 2px solid rgba(0, 212, 255, 0.3);
+  border: 2px solid rgba(104, 211, 136, 0.4);
   background: radial-gradient(
     circle at 35% 35%,
-    rgba(0, 212, 255, 0.18) 0%,
-    rgba(108, 99, 255, 0.06) 60%,
+    rgba(194, 237, 218, 0.35) 0%,
+    rgba(104, 211, 136, 0.12) 60%,
     transparent 100%
   );
-  box-shadow: 0 0 24px rgba(0, 212, 255, 0.12);
+  box-shadow: 0 0 24px rgba(104, 211, 136, 0.18);
 }
 
 /* Reduce shapes on mobile for performance */
@@ -403,18 +405,19 @@ button {
   gap: 4rem;
 }
 
-/* CSS-based avatar placeholder */
+/* Assuming .about__avatar already has width, height, and border-radius: 50% */
 .about__avatar {
-  flex-shrink: 0;
-  width: 180px;
-  height: 180px;
+  width: 150px; /* Adjust to your preferred size */
+  height: 150px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 40px rgba(108, 99, 255, 0.35);
-  will-change: opacity;
+  overflow: hidden; /* Keeps the image inside the circle */
+}
+
+.about__avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This is the magic property that prevents stretching */
+  display: block;
 }
 
 .about__avatar-initials {
@@ -481,15 +484,15 @@ button {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-bg);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-orange-warm) 100%);
   border-radius: 50px;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
+  box-shadow: 0 4px 20px rgba(244, 58, 9, 0.30);
 }
 
 .about__cv-link:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 28px rgba(108, 99, 255, 0.5);
+  box-shadow: 0 8px 28px rgba(244, 58, 9, 0.45);
 }
 
 .about__cv-link:active {
@@ -530,7 +533,7 @@ button {
   gap: 0.5rem;
   padding: 1.25rem 1.5rem;
   background-color: var(--color-surface);
-  border: 1px solid rgba(108, 99, 255, 0.2);
+  border: 1px solid rgba(194, 237, 218, 0.6);
   border-radius: 12px;
   cursor: default;
   will-change: transform;
@@ -539,8 +542,8 @@ button {
 }
 
 .skill-badge:hover {
-  border-color: rgba(108, 99, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.2);
+  border-color: rgba(104, 211, 136, 0.7);
+  box-shadow: 0 8px 32px rgba(104, 211, 136, 0.2);
 }
 
 .skill-badge__header {
@@ -574,17 +577,17 @@ button {
 }
 
 .skill-badge__category--languages {
-  background-color: rgba(108, 99, 255, 0.15);
+  background-color: rgba(244, 58, 9, 0.10);
   color: var(--color-primary);
 }
 
 .skill-badge__category--frameworks {
-  background-color: rgba(0, 212, 255, 0.12);
+  background-color: rgba(104, 211, 136, 0.12);
   color: var(--color-accent);
 }
 
 .skill-badge__category--tools {
-  background-color: rgba(77, 255, 180, 0.12);
+  background-color: rgba(194, 237, 218, 0.35);
   color: var(--color-success);
 }
 
@@ -664,7 +667,7 @@ button {
 .project-card {
   position: relative;
   background-color: var(--color-surface);
-  border: 1px solid rgba(108, 99, 255, 0.2);
+  border: 1px solid rgba(194, 237, 218, 0.6);
   border-radius: 16px;
   overflow: hidden;
   cursor: default;
@@ -675,8 +678,8 @@ button {
 }
 
 .project-card:hover {
-  border-color: rgba(108, 99, 255, 0.5);
-  box-shadow: 0 16px 48px rgba(108, 99, 255, 0.25);
+  border-color: rgba(104, 211, 136, 0.7);
+  box-shadow: 0 16px 48px rgba(104, 211, 136, 0.2);
 }
 
 /* Image area */
@@ -684,7 +687,7 @@ button {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background-color: rgba(108, 99, 255, 0.08);
+  background-color: rgba(194, 237, 218, 0.2);
 }
 
 .project-card__image img {
@@ -699,8 +702,8 @@ button {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(108, 99, 255, 0.15) 0%,
-    rgba(0, 212, 255, 0.08) 100%
+    rgba(255, 183, 102, 0.15) 0%,
+    rgba(194, 237, 218, 0.10) 100%
   );
 }
 
@@ -729,9 +732,9 @@ button {
   text-transform: uppercase;
   padding: 0.2rem 0.6rem;
   border-radius: 50px;
-  background-color: rgba(0, 212, 255, 0.1);
+  background-color: rgba(104, 211, 136, 0.12);
   color: var(--color-accent);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(104, 211, 136, 0.3);
 }
 
 /* Overlay — hidden by default; GSAP reveals on hover */
@@ -744,8 +747,8 @@ button {
   padding: 1.5rem;
   background: linear-gradient(
     to top,
-    rgba(10, 10, 15, 0.95) 0%,
-    rgba(10, 10, 15, 0.75) 60%,
+    rgba(253, 248, 244, 0.97) 0%,
+    rgba(253, 248, 244, 0.80) 60%,
     transparent 100%
   );
   opacity: 0;
@@ -782,24 +785,24 @@ button {
 }
 
 .project-card__link--repo {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  color: var(--color-bg);
-  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.35);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-orange-warm) 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(244, 58, 9, 0.30);
 }
 
 .project-card__link--repo:hover {
-  box-shadow: 0 6px 24px rgba(108, 99, 255, 0.5);
+  box-shadow: 0 6px 24px rgba(244, 58, 9, 0.45);
 }
 
 .project-card__link--demo {
   background: transparent;
   color: var(--color-accent);
-  border: 1px solid rgba(0, 212, 255, 0.4);
+  border: 1px solid rgba(104, 211, 136, 0.5);
 }
 
 .project-card__link--demo:hover {
-  background-color: rgba(0, 212, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.2);
+  background-color: rgba(104, 211, 136, 0.10);
+  box-shadow: 0 4px 16px rgba(104, 211, 136, 0.2);
 }
 
 /* Mobile: always show overlay content (no hover on touch) */
@@ -930,7 +933,7 @@ button {
   width: 100%;
   padding: 0.75rem 1rem;
   background-color: var(--color-surface);
-  border: 1px solid rgba(108, 99, 255, 0.2);
+  border: 1px solid rgba(194, 237, 218, 0.6);
   border-radius: 8px;
   color: var(--color-text);
   font-size: 1rem;
@@ -941,8 +944,8 @@ button {
 .contact-form__field input:focus,
 .contact-form__field textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(104, 211, 136, 0.2);
 }
 
 .contact-form__field input[aria-invalid="true"],
@@ -982,17 +985,17 @@ button {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-bg);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-orange-warm) 100%);
   border-radius: 50px;
   cursor: pointer;
   transition: transform var(--transition-base), box-shadow var(--transition-base),
     opacity var(--transition-base);
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(244, 58, 9, 0.30);
 }
 
 .contact-form__submit:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 28px rgba(108, 99, 255, 0.5);
+  box-shadow: 0 8px 28px rgba(244, 58, 9, 0.45);
 }
 
 .contact-form__submit:disabled {
