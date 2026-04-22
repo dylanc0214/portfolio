@@ -19,7 +19,6 @@ export const ProjectsNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag },
       width={expanded ? 600 : 250}
       onDrag={onDrag}
       onClick={() => setExpanded(!expanded)}
-      expandable={true}
       expanded={expanded}
     >
       <h3>Projects</h3>
@@ -29,6 +28,7 @@ export const ProjectsNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag },
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '20px', textAlign: 'left' }}>

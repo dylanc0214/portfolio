@@ -43,19 +43,14 @@ export function CanvasMap() {
     if (!canvasBounds || !profileRef.current) return;
 
     const getCenter = (el: HTMLElement | null): { x: number, y: number } | null => {
-      if (!el) return null;
-      // We get absolute positions but we need them relative to the SVG container
-      // Since SVG is positioned absolute inside TransformComponent which handles scaling/translation,
-      // we can actually just read the top/left styles or translate values.
-      // But getBoundingClientRect gives screen coordinates, so we'll compute relative pos
+      if (!el || !containerRef.current) return null;
       const rect = el.getBoundingClientRect();
-      const parentRect = containerRef.current!.getBoundingClientRect();
-      const scale = 1; // getBoundingClientRect includes scale, but wait, TransformComponent scales the inner div.
+      const parentRect = containerRef.current.getBoundingClientRect();
+      const scale = parentRect.width / 4000; // 4000 is our explicit canvas width
       
-      // Better approach when inside TransformWrapper: use offsetLeft/offsetTop if they are siblings in the same scale context
       return {
-        x: el.offsetLeft + el.offsetWidth / 2,
-        y: el.offsetTop + el.offsetHeight / 2,
+        x: (rect.left - parentRect.left) / scale + el.offsetWidth / 2,
+        y: (rect.top - parentRect.top) / scale + el.offsetHeight / 2,
       };
     };
 
@@ -98,10 +93,12 @@ export function CanvasMap() {
     <div className="canvas-container">
       <TransformWrapper
         initialScale={1}
-        minScale={0.1}
-        maxScale={4}
+        minScale={0.5}
+        maxScale={2.0}
         centerOnInit={true}
-        wheel={{ step: 0.1 }}
+        limitToBounds={true}
+        wheel={{ step: 0.05 }}
+        panning={{ excluded: ['node-container'] }}
       >
         <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
           <div ref={containerRef} className="canvas-bg" style={{ width: 4000, height: 4000, position: 'relative' }}>

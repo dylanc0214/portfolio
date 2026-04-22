@@ -19,7 +19,6 @@ export const SkillsNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, r
       width={expanded ? 400 : 200}
       onDrag={onDrag}
       onClick={() => setExpanded(!expanded)}
-      expandable={true}
       expanded={expanded}
     >
       <h3>Tech Skills</h3>
@@ -29,6 +28,7 @@ export const SkillsNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, r
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
              <div className="pill-container" style={{ marginTop: '15px' }}>

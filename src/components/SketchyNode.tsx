@@ -11,12 +11,11 @@ interface SketchyNodeProps {
   onDrag?: () => void;
   onClick?: () => void;
   children: React.ReactNode;
-  expandable?: boolean;
   expanded?: boolean;
 }
 
 export const SketchyNode = React.forwardRef<HTMLDivElement, SketchyNodeProps>(
-  ({ id, x, y, width, onDrag, onClick, children, expandable, expanded }, ref) => {
+  ({ id, x, y, width, onDrag, onClick, children, expanded }, ref) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [bounds, setBounds] = useState({ w: width, h: 200 }); // Default height
@@ -75,8 +74,12 @@ export const SketchyNode = React.forwardRef<HTMLDivElement, SketchyNodeProps>(
         onClick={onClick}
         onDrag={onDrag}
         onDragEnd={onDrag}
+        onPointerDown={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
         initial={{ x, y }}
-        layout={expandable} // If expandable, animate layout changes
+        animate={{ width }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         className="node-container"
         style={{ width, zIndex: expanded ? 50 : 1 }}
       >

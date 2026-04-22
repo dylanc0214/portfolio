@@ -18,7 +18,6 @@ export const AboutNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, re
       width={expanded ? 450 : 250}
       onDrag={onDrag}
       onClick={() => setExpanded(!expanded)}
-      expandable={true}
       expanded={expanded}
     >
       <h3>About Me</h3>
@@ -28,6 +27,7 @@ export const AboutNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, re
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
              <div style={{ textAlign: 'left', marginTop: 10 }}>
