@@ -1,6 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import rough from 'roughjs';
+import { Hand, MousePointer2 } from 'lucide-react';
 import { ProfileNode } from './ProfileNode';
 import { AboutNode } from './AboutNode';
 import { ProjectsNode } from './ProjectsNode';
@@ -11,6 +12,7 @@ import { ContactNode } from './ContactNode';
 export function CanvasMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [interactionMode, setInteractionMode] = useState<'pan' | 'select'>('select');
 
   const profileRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -80,7 +82,7 @@ export function CanvasMap() {
   // Remove handleDrag since rAF loop handles it automatically
 
   return (
-    <div className="canvas-container">
+    <div className={`canvas-container ${interactionMode === 'pan' ? 'pan-mode-active' : ''}`}>
       <TransformWrapper
         initialScale={1}
         minScale={0.6}
@@ -90,22 +92,49 @@ export function CanvasMap() {
         wheel={{ step: 0.02 }}
         panning={{ excluded: ['node-container'] }}
       >
-        <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-          <div ref={containerRef} className="canvas-bg" style={{ width: 2000, height: 2000, position: 'relative' }}>
-            
-            <svg 
-              ref={svgRef} 
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} 
-            />
+        {({ zoomIn, zoomOut, state }) => (
+          <>
+            {/* Toolbar Overlay */}
+            <div className="hud-toolbar">
+              <button 
+                className={`toolbar-btn ${interactionMode === 'pan' ? 'active' : ''}`}
+                onClick={() => setInteractionMode('pan')}
+              >
+                <Hand size={18} /> Pan
+              </button>
+              <button 
+                className={`toolbar-btn ${interactionMode === 'select' ? 'active' : ''}`}
+                onClick={() => setInteractionMode('select')}
+              >
+                <MousePointer2 size={18} /> Select
+              </button>
+            </div>
 
-            <ProfileNode ref={profileRef} />
-            <AboutNode ref={aboutRef} />
-            <ProjectsNode ref={projectsRef} />
-            <SkillsNode ref={skillsRef} />
-            <ContactNode ref={contactRef} />
+            {/* Zoom Controls HUD */}
+            <div className="hud-zoom">
+              <button className="hud-btn" onClick={() => zoomOut()}>-</button>
+              <span style={{ minWidth: '45px', textAlign: 'center' }}>{Math.round(state.scale * 100)}%</span>
+              <button className="hud-btn" onClick={() => zoomIn()}>+</button>
+            </div>
 
-          </div>
-        </TransformComponent>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
+              <div ref={containerRef} className="canvas-bg" style={{ width: 2000, height: 2000, position: 'relative' }}>
+                
+                <svg 
+                  ref={svgRef} 
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} 
+                />
+
+                <ProfileNode ref={profileRef} />
+                <AboutNode ref={aboutRef} />
+                <ProjectsNode ref={projectsRef} />
+                <SkillsNode ref={skillsRef} />
+                <ContactNode ref={contactRef} />
+
+              </div>
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
     </div>
   );

@@ -26,13 +26,15 @@ export const SkillsNode = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
-             <div className="pill-container" style={{ marginTop: '15px' }}>
-               {skills.map(skill => (
-                 <span key={skill.id} className="pill" title={`${skill.category} - ${skill.proficiency * 100}%`}>
-                   {skill.name}
-                 </span>
-               ))}
-             </div>
+            <div className="custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '10px' }}>
+              <div className="pill-container" style={{ marginTop: '15px' }}>
+                {skills.map(skill => (
+                  <span key={skill.id} className="pill" title={`${skill.category} - ${skill.proficiency * 100}%`}>
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

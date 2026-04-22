@@ -26,28 +26,30 @@ export const ProjectsNode = React.forwardRef<HTMLDivElement, {}>((props, ref) =>
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '20px', textAlign: 'left' }}>
-              {projects.map((proj, idx) => (
-                <div key={idx} style={{ 
-                  border: '2px dashed #ccc', 
-                  padding: '15px', 
-                  borderRadius: '10px' 
-                }}>
-                  <strong style={{ fontSize: '1.1rem' }}>{proj.title}</strong>
-                  <p style={{ fontSize: '0.9rem', marginTop: '5px' }}>{proj.description}</p>
-                  <div className="pill-container" style={{ justifyContent: 'flex-start' }}>
-                    {proj.tags.map(tag => (
-                      <span key={tag} className="pill" style={{ borderColor: '#aaa' }}>{tag}</span>
-                    ))}
+            <div className="custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '20px', textAlign: 'left' }}>
+                {projects.map((proj, idx) => (
+                  <div key={idx} style={{ 
+                    border: '2px dashed #ccc', 
+                    padding: '15px', 
+                    borderRadius: '10px' 
+                  }}>
+                    <strong style={{ fontSize: '1.1rem' }}>{proj.title}</strong>
+                    <p style={{ fontSize: '0.9rem', marginTop: '5px' }}>{proj.description}</p>
+                    <div className="pill-container" style={{ justifyContent: 'flex-start' }}>
+                      {proj.tags.map(tag => (
+                        <span key={tag} className="pill" style={{ borderColor: '#aaa' }}>{tag}</span>
+                      ))}
+                    </div>
+                    <div className="links-container" style={{ flexDirection: 'row', marginTop: '10px' }}>
+                      <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="link" onClick={(e) => e.stopPropagation()}>GitHub</a>
+                      {proj.demoUrl && (
+                        <a href={proj.demoUrl} target="_blank" rel="noreferrer" className="link" onClick={(e) => e.stopPropagation()}>Live Demo</a>
+                      )}
+                    </div>
                   </div>
-                  <div className="links-container" style={{ flexDirection: 'row', marginTop: '10px' }}>
-                    <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="link" onClick={(e) => e.stopPropagation()}>GitHub</a>
-                    {proj.demoUrl && (
-                      <a href={proj.demoUrl} target="_blank" rel="noreferrer" className="link" onClick={(e) => e.stopPropagation()}>Live Demo</a>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

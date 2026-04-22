@@ -25,18 +25,20 @@ export const AboutNode = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             style={{ overflow: 'hidden' }}
           >
-             <div style={{ textAlign: 'left', marginTop: 10 }}>
-               <p><strong>Program:</strong> Diploma in IT (Software Engineering)</p>
-               <p><strong>Institution:</strong> Asia Pacific University (APU)</p>
-               <p><strong>Exp. Graduation:</strong> Oct 2026</p>
-               <p style={{ marginTop: 10, fontSize: '0.9rem' }}>
-                  I am a motivated IT diploma student with hands-on learning experience in programming. 
-                  Passionate about tech with experience in Python, Java, HTML, CSS, PHP, JS, and MySQL.
-               </p>
-               <a href="/Resume.pdf" download="Resume.pdf" className="btn" onClick={(e) => e.stopPropagation()}>
-                  Download CV
-               </a>
-             </div>
+            <div className="custom-scrollbar" style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '10px' }}>
+              <div style={{ textAlign: 'left', marginTop: 10 }}>
+                <p><strong>Program:</strong> Diploma in IT (Software Engineering)</p>
+                <p><strong>Institution:</strong> Asia Pacific University (APU)</p>
+                <p><strong>Exp. Graduation:</strong> Oct 2026</p>
+                <p style={{ marginTop: 10, fontSize: '0.9rem' }}>
+                    I am a motivated IT diploma student with hands-on learning experience in programming. 
+                    Passionate about tech with experience in Python, Java, HTML, CSS, PHP, JS, and MySQL.
+                </p>
+                <a href="/Resume.pdf" download="Resume.pdf" className="btn" onClick={(e) => e.stopPropagation()}>
+                    Download CV
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
