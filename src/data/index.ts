@@ -1,5 +1,4 @@
-import type { SkillBadgeProps } from '../components/SkillBadge'
-import type { ProjectCardProps } from '../components/ProjectCard'
+
 
 export interface Skill {
   id: string
@@ -30,14 +29,14 @@ export const skills: Skill[] = [
   { id: 'pgadmin', name: 'PgAdmin', category: 'Tools', proficiency: 0.6 },
 ]
 
-export const skillsData: { languages: SkillBadgeProps[]; frameworks: SkillBadgeProps[]; tools: SkillBadgeProps[] } = {
+export const skillsData = {
   languages: skills.filter(s => s.category === 'Languages'),
   frameworks: skills.filter(s => s.category === 'Frameworks'),
   tools: skills.filter(s => s.category === 'Tools'),
 }
 
 export interface Project {
-  id: string
+  id?: string
   title: string
   description: string
   tags: string[]
@@ -46,7 +45,7 @@ export interface Project {
   imageUrl?: string
 }
 
-export const projects: ProjectCardProps[] = [
+export const projects: Project[] = [
   {
     title: 'Learning Management System',
     description:

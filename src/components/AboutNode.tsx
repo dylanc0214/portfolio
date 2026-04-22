@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+import { SketchyNode } from './SketchyNode';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface Props {
+  onDrag: () => void;
+}
+
+export const AboutNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, ref) => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <SketchyNode
+      id="about-node"
+      ref={ref}
+      x={2000 - 450} // to the left of center
+      y={2000 - 200}
+      width={expanded ? 450 : 250}
+      onDrag={onDrag}
+      onClick={() => setExpanded(!expanded)}
+      expandable={true}
+      expanded={expanded}
+    >
+      <h3>About Me</h3>
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            style={{ overflow: 'hidden' }}
+          >
+             <div style={{ textAlign: 'left', marginTop: 10 }}>
+               <p><strong>Program:</strong> Diploma in IT (Software Engineering)</p>
+               <p><strong>Institution:</strong> Asia Pacific University (APU)</p>
+               <p><strong>Exp. Graduation:</strong> Oct 2026</p>
+               <p style={{ marginTop: 10, fontSize: '0.9rem' }}>
+                  I am a motivated IT diploma student with hands-on learning experience in programming. 
+                  Passionate about tech with experience in Python, Java, HTML, CSS, PHP, JS, and MySQL.
+               </p>
+               <a href="/Resume.pdf" download="Resume.pdf" className="btn" onClick={(e) => e.stopPropagation()}>
+                  Download CV
+               </a>
+             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!expanded && <p style={{ fontSize: '0.9rem', color: '#666' }}>(Click to expand)</p>}
+    </SketchyNode>
+  );
+});

@@ -1,0 +1,29 @@
+
+> portfolio@0.0.0 build
+> vite build
+
+vite v6.4.1 building for production...
+transforming...
+✓ 2141 modules transformed.
+✗ Build failed in 7.98s
+error during build:
+src/components/ContactNode.tsx (3:15): "Github" is not exported by "node_modules/lucide-react/dist/esm/lucide-react.js", imported by "src/components/ContactNode.tsx".
+file: /var/www/Portfolio/src/components/ContactNode.tsx:3:15
+
+1: import React from 'react';
+2: import { SketchyNode } from './SketchyNode';
+3: import { Mail, Github, Linkedin } from 'lucide-react';
+                  ^
+4: 
+5: interface Props {
+
+    at getRollupError (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ReturnValueScope.findVariable (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at Identifier.bind (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at CallExpression.bind (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at CallExpression.bind (file:///var/www/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:12179:15)
