@@ -3,21 +3,16 @@ import { SketchyNode } from './SketchyNode';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '../data';
 
-interface Props {
-  onDrag: () => void;
-}
-
-export const SkillsNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, ref) => {
+export const SkillsNode = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <SketchyNode
       id="skills-node"
       ref={ref}
-      x={2000 - 300} // below and left
-      y={2000 + 150}
+      x={1000 - 450} // below and left
+      y={1000 + 250}
       width={expanded ? 400 : 200}
-      onDrag={onDrag}
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
     >

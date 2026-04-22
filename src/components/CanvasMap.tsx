@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import rough from 'roughjs';
 import { ProfileNode } from './ProfileNode';
@@ -7,19 +7,10 @@ import { ProjectsNode } from './ProjectsNode';
 import { SkillsNode } from './SkillsNode';
 import { ContactNode } from './ContactNode';
 
-interface NodeRect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
 
 export function CanvasMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-
-  // We maintain a simple trigger state to redraw lines when nodes are dragged
-  const [redrawTick, setRedrawTick] = useState(0);
 
   const profileRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -46,7 +37,7 @@ export function CanvasMap() {
       if (!el || !containerRef.current) return null;
       const rect = el.getBoundingClientRect();
       const parentRect = containerRef.current.getBoundingClientRect();
-      const scale = parentRect.width / 4000; // 4000 is our explicit canvas width
+      const scale = parentRect.width / 2000; // 2000 is our explicit canvas width
       
       return {
         x: (rect.left - parentRect.left) / scale + el.offsetWidth / 2,
@@ -62,7 +53,8 @@ export function CanvasMap() {
           stroke: '#666',
           strokeWidth: 2,
           roughness: 1.5,
-          bowing: 1
+          bowing: 1,
+          seed: 1
         });
         svg.appendChild(path);
       }
@@ -74,45 +66,43 @@ export function CanvasMap() {
     drawConnection(profileRef.current, contactRef.current);
   };
 
-  useLayoutEffect(() => {
-    drawLines();
-  }, [redrawTick]);
-
-  // Recalculate layout on window resize as well
+  // Continuous loop to perfectly sync lines with any drag or Framer Motion layout animation
   useEffect(() => {
-    const handleResize = () => setRedrawTick(t => t + 1);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    let animationFrameId: number;
+    const renderLoop = () => {
+      drawLines();
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+    renderLoop();
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-  const handleDrag = () => {
-    setRedrawTick(t => t + 1);
-  };
+  // Remove handleDrag since rAF loop handles it automatically
 
   return (
     <div className="canvas-container">
       <TransformWrapper
         initialScale={1}
-        minScale={0.5}
-        maxScale={2.0}
+        minScale={0.6}
+        maxScale={1.5}
         centerOnInit={true}
         limitToBounds={true}
-        wheel={{ step: 0.05 }}
+        wheel={{ step: 0.02 }}
         panning={{ excluded: ['node-container'] }}
       >
         <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-          <div ref={containerRef} className="canvas-bg" style={{ width: 4000, height: 4000, position: 'relative' }}>
+          <div ref={containerRef} className="canvas-bg" style={{ width: 2000, height: 2000, position: 'relative' }}>
             
             <svg 
               ref={svgRef} 
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} 
             />
 
-            <ProfileNode ref={profileRef} onDrag={handleDrag} />
-            <AboutNode ref={aboutRef} onDrag={handleDrag} />
-            <ProjectsNode ref={projectsRef} onDrag={handleDrag} />
-            <SkillsNode ref={skillsRef} onDrag={handleDrag} />
-            <ContactNode ref={contactRef} onDrag={handleDrag} />
+            <ProfileNode ref={profileRef} />
+            <AboutNode ref={aboutRef} />
+            <ProjectsNode ref={projectsRef} />
+            <SkillsNode ref={skillsRef} />
+            <ContactNode ref={contactRef} />
 
           </div>
         </TransformComponent>

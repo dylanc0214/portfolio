@@ -2,19 +2,14 @@ import React from 'react';
 import { SketchyNode } from './SketchyNode';
 import { Mail, ExternalLink } from 'lucide-react';
 
-interface Props {
-  onDrag: () => void;
-}
-
-export const ContactNode = React.forwardRef<HTMLDivElement, Props>(({ onDrag }, ref) => {
+export const ContactNode = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
   return (
     <SketchyNode
       id="contact-node"
       ref={ref}
-      x={2000 + 100} // below and right
-      y={2000 + 200}
+      x={1000 + 200} // below and right
+      y={1000 + 250}
       width={250}
-      onDrag={onDrag}
     >
       <h3>Get in touch</h3>
       <div className="links-container">
