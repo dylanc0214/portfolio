@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { TransformWrapper, TransformComponent, type ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
 import rough from 'roughjs';
 import { Hand, MousePointer2 } from 'lucide-react';
 import { ProfileNode } from './ProfileNode';
@@ -8,10 +8,25 @@ import { ProjectsNode } from './ProjectsNode';
 import { SkillsNode } from './SkillsNode';
 import { ContactNode } from './ContactNode';
 
+// Bounding box (with margin) of the 5 nodes in their default, collapsed state.
+// Used to pick a scale that keeps every node visible on first load.
+const NODES_BBOX = { width: 1150, height: 900 };
+const MIN_SCALE = 0.6;
+const MAX_SCALE = 1.5;
+
+function getFitScale(): number {
+  const scale = Math.min(
+    window.innerWidth / NODES_BBOX.width,
+    window.innerHeight / NODES_BBOX.height,
+  );
+  return Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
+}
+
 
 export function CanvasMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const transformRef = useRef<ReactZoomPanPinchRef | null>(null);
   const [interactionMode, setInteractionMode] = useState<'pan' | 'select'>('select');
 
   const profileRef = useRef<HTMLDivElement>(null);
@@ -81,15 +96,26 @@ export function CanvasMap() {
 
   // Remove handleDrag since rAF loop handles it automatically
 
+  // Re-fit the view to keep all 5 nodes visible if the window is resized
+  // (e.g. rotating a mobile device).
+  useEffect(() => {
+    const handleResize = () => {
+      transformRef.current?.centerView(getFitScale(), 0);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className={`canvas-container ${interactionMode === 'pan' ? 'pan-mode-active' : ''}`}>
       <TransformWrapper
-        initialScale={1}
+        ref={transformRef}
+        initialScale={getFitScale()}
         minScale={0.6}
         maxScale={1.5}
         centerOnInit={true}
         limitToBounds={true}
-        wheel={{ step: 0.02 }}
+        wheel={{ step: 0.02, excluded: ['custom-scrollbar'] }}
         panning={{ excluded: ['node-container'] }}
       >
         {({ zoomIn, zoomOut, state }) => (
