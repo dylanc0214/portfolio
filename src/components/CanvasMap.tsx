@@ -11,7 +11,8 @@ import { ContactNode } from './ContactNode';
 // Bounding box (with margin) of the 5 nodes in their default, collapsed state.
 // Used to pick a scale that keeps every node visible on first load.
 const NODES_BBOX = { width: 1150, height: 900 };
-const MIN_SCALE = 0.6;
+const ABSOLUTE_MIN_SCALE = 0.3;
+const DEFAULT_MIN_SCALE = 0.6;
 const MAX_SCALE = 1.5;
 
 function getFitScale(): number {
@@ -19,7 +20,13 @@ function getFitScale(): number {
     window.innerWidth / NODES_BBOX.width,
     window.innerHeight / NODES_BBOX.height,
   );
-  return Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
+  return Math.min(MAX_SCALE, Math.max(ABSOLUTE_MIN_SCALE, scale));
+}
+
+// Let the user zoom out at least as far as the fit scale, even on narrow
+// screens where that's below the default minimum.
+function getMinScale(fitScale: number): number {
+  return Math.min(DEFAULT_MIN_SCALE, fitScale);
 }
 
 
@@ -111,7 +118,7 @@ export function CanvasMap() {
       <TransformWrapper
         ref={transformRef}
         initialScale={getFitScale()}
-        minScale={0.6}
+        minScale={getMinScale(getFitScale())}
         maxScale={1.5}
         centerOnInit={true}
         limitToBounds={true}
