@@ -13,7 +13,6 @@ export default defineConfig({
         // Split vendor libraries into separate chunks so they can be cached independently
         manualChunks: {
           react: ['react', 'react-dom'],
-          gsap: ['gsap'],
         },
       },
     },
